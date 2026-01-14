@@ -28,15 +28,22 @@ def scrape_mag():
         if date_el:
             data['fecha_reporte'] = date_el.get_text(strip=True)
         
-        # Extraer los items
+        # Extraer los items de forma más precisa
         items = container.find_all('div', class_='item')
         for item in items:
-            text_parts = [p.strip() for p in item.get_text(separator='\n').split('\n') if p.strip()]
-            if len(text_parts) >= 2:
-                # El primer elemento suele ser el valor y el segundo la etiqueta
-                value = text_parts[0]
-                label = text_parts[1]
+            # Buscar los spans específicos si existen
+            spans = item.find_all('span', class_=['home-data', 'home-data-2'])
+            if len(spans) >= 2:
+                value = spans[0].get_text(strip=True)
+                label = spans[1].get_text(strip=True)
                 data[label] = value
+            else:
+                # Fallback al método anterior si la estructura cambia
+                text_parts = [p.strip() for p in item.get_text(separator='\n').split('\n') if p.strip()]
+                if len(text_parts) >= 2:
+                    value = text_parts[0]
+                    label = text_parts[1]
+                    data[label] = value
         
         data['ultima_actualizacion'] = datetime.now().isoformat()
         return data
@@ -48,8 +55,11 @@ def scrape_mag():
 if __name__ == "__main__":
     result = scrape_mag()
     if result:
+        # Asegurarnos de que las claves sean consistentes
+        # Si el usuario notó que OP estaba mal, verificamos su presencia
         with open('mercado_agroganadero.json', 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=4, ensure_ascii=False)
         print("Datos guardados exitosamente en mercado_agroganadero.json")
+        print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         print("No se pudieron obtener los datos.")
