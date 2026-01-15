@@ -1,9 +1,9 @@
-name: Daily MAG Data Update
+name: Hourly MAG Data Update
 
 on:
   schedule:
-    # Se ejecuta todos los días a las 12:00 UTC (9:00 AM Argentina)
-    - cron: '0 12 * * *'
+    # Se ejecuta al minuto 0 de cada hora
+    - cron: '0 * * * *'
   workflow_dispatch: # Permite ejecución manual
 
 jobs:
@@ -31,5 +31,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add mercado_agroganadero.json
-          # Forzamos el commit si hay cambios para asegurar la actualización
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MAG data: $(date +'%Y-%m-%d')" && git push)
+          # Solo hará commit y push si los datos en el sitio web han cambiado
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MAG data: $(date +'%Y-%m-%d %H:%M')" && git push)
