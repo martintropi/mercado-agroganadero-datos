@@ -1,12 +1,12 @@
 {
-    "fecha_reporte": "14/01/2026",
-    "CAMIONES": "165",
-    "CABEZAS": "5.252",
-    "CAB.SEMANA": "17.063",
-    "OP": "95%",
-    "INMAG": "Operando",
-    "IGMAG": "Operando",
-    "ÍNDICE ARREND.": "Operando",
-    "DTe a MAG": "1.691",
-    "ultima_actualizacion": "2026-01-14T08:22:13.583616"
+    "fecha_reporte": "15/01/2026",
+    "CAMIONES": "2",
+    "CABEZAS": "44",
+    "CAB.SEMANA": "17.107",
+    "OP": "100%",
+    "INMAG": "0,00",
+    "IGMAG": "0,00",
+    "ÍNDICE ARREND.": "0,00",
+    "DTe a MAG": "4.918",
+    "ultima_actualizacion": "2026-01-15T08:02:07.056210"
 }
