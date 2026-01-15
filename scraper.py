@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import os
 
 def scrape_mag():
@@ -45,7 +45,11 @@ def scrape_mag():
                     label = text_parts[1]
                     data[label] = value
         
-        data['ultima_actualizacion'] = datetime.now().isoformat()
+        # Configurar horario de Argentina (GMT-3)
+        tz_ar = timezone(timedelta(hours=-3))
+        now_ar = datetime.now(tz_ar)
+        data['ultima_actualizacion'] = now_ar.strftime("%Y-%m-%d %H:%M:%S ART")
+        
         return data
 
     except Exception as e:
@@ -55,8 +59,6 @@ def scrape_mag():
 if __name__ == "__main__":
     result = scrape_mag()
     if result:
-        # Asegurarnos de que las claves sean consistentes
-        # Si el usuario notó que OP estaba mal, verificamos su presencia
         with open('mercado_agroganadero.json', 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=4, ensure_ascii=False)
         print("Datos guardados exitosamente en mercado_agroganadero.json")
