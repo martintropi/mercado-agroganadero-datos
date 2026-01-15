@@ -47,23 +47,21 @@ class MAGDashboardScraper:
             soup = BeautifulSoup(response.content, 'html.parser')
             
             datos = {
-                'camiones': None,
-                'cabezas': None,
-                'cab_semana': None,
-                'op': None,
-                'inmag': None,
-                'igmag': None,
-                'indice_arrend': None,
-                'dte_a_mag': None
+                'CAMIONES': None,
+                'CABEZAS': None,
+                'CAB.SEMANA': None,
+                'OP': None,
+                'INMAG': None,
+                'IGMAG': None,
+                'ÍNDICE ARREND.': None,
+                'DTe a MAG': None
             }
             
             # Buscar todos los enlaces con javascript:void(0)
-            # Estos contienen los datos del dashboard
             links = soup.find_all('a', href='javascript:void(0);')
             
             for link in links:
                 text = link.get_text(strip=True)
-                text_upper = text.upper()
                 
                 # Separar el numero del label
                 parts = text.split('\n')
@@ -72,21 +70,21 @@ class MAGDashboardScraper:
                     label = parts[1].strip().upper()
                     
                     if 'CAMIONES' in label:
-                        datos['camiones'] = self.clean_number(numero)
+                        datos['CAMIONES'] = self.clean_number(numero)
                     elif 'CABEZAS' in label and 'SEMANA' not in label:
-                        datos['cabezas'] = self.clean_number(numero)
+                        datos['CABEZAS'] = self.clean_number(numero)
                     elif 'CAB.SEMANA' in label or 'SEMANA' in label:
-                        datos['cab_semana'] = self.clean_number(numero)
+                        datos['CAB.SEMANA'] = self.clean_number(numero)
                     elif label == 'OP':
-                        datos['op'] = self.clean_number(numero)
+                        datos['OP'] = self.clean_number(numero)
                     elif 'INMAG' in label:
-                        datos['inmag'] = self.clean_number(numero)
+                        datos['INMAG'] = self.clean_number(numero)
                     elif 'IGMAG' in label:
-                        datos['igmag'] = self.clean_number(numero)
+                        datos['IGMAG'] = self.clean_number(numero)
                     elif 'ARREND' in label:
-                        datos['indice_arrend'] = self.clean_number(numero)
+                        datos['ÍNDICE ARREND.'] = self.clean_number(numero)
                     elif 'DTE' in label or 'MAG' in label:
-                        datos['dte_a_mag'] = self.clean_number(numero)
+                        datos['DTe a MAG'] = self.clean_number(numero)
             
             # Validar que obtuvimos datos
             valores_obtenidos = sum(1 for v in datos.values() if v is not None)
@@ -98,14 +96,14 @@ class MAGDashboardScraper:
             
             # Mostrar datos obtenidos
             print("\nResumen:")
-            print(f"  Camiones: {datos['camiones']}")
-            print(f"  Cabezas: {datos['cabezas']}")
-            print(f"  Cab/Semana: {datos['cab_semana']}")
-            print(f"  OP: {datos['op']}")
-            print(f"  INMAG: {datos['inmag']}")
-            print(f"  IGMAG: {datos['igmag']}")
-            print(f"  Indice Arrend: {datos['indice_arrend']}")
-            print(f"  DTe a MAG: {datos['dte_a_mag']}")
+            print(f"  CAMIONES: {datos['CAMIONES']}")
+            print(f"  CABEZAS: {datos['CABEZAS']}")
+            print(f"  CAB.SEMANA: {datos['CAB.SEMANA']}")
+            print(f"  OP: {datos['OP']}")
+            print(f"  INMAG: {datos['INMAG']}")
+            print(f"  IGMAG: {datos['IGMAG']}")
+            print(f"  ÍNDICE ARREND.: {datos['ÍNDICE ARREND.']}")
+            print(f"  DTe a MAG: {datos['DTe a MAG']}")
             
             return datos
             
@@ -116,16 +114,24 @@ class MAGDashboardScraper:
             return None
     
     def save_to_json(self, data, filename='mercado_agroganadero.json'):
-        """Guarda los datos en formato JSON"""
+        """Guarda los datos en formato JSON compatible con el frontend"""
         try:
+            # Formato adaptado para el frontend React
             output = {
+                'CAMIONES': data['CAMIONES'],
+                'CABEZAS': data['CABEZAS'],
+                'CAB.SEMANA': data['CAB.SEMANA'],
+                'OP': data['OP'],
+                'INMAG': data['INMAG'],
+                'IGMAG': data['IGMAG'],
+                'ÍNDICE ARREND.': data['ÍNDICE ARREND.'],
+                'DTe a MAG': data['DTe a MAG'],
+                'fecha_reporte': datetime.now().strftime('%d/%m/%Y %H:%M'),
                 'metadata': {
                     'fecha_actualizacion': datetime.now().isoformat(),
-                    'fecha_actualizacion_legible': datetime.now().strftime('%d/%m/%Y %H:%M:%S'),
                     'fuente': self.URL,
                     'descripcion': 'Datos del dashboard principal del Mercado Agroganadero'
-                },
-                'dashboard': data
+                }
             }
             
             with open(filename, 'w', encoding='utf-8') as f:
