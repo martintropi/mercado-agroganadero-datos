@@ -1,130 +1,16 @@
 {
+  "CAMIONES": 2,
+  "CABEZAS": 44,
+  "CAB.SEMANA": 17107,
+  "OP": 100,
+  "INMAG": 0.0,
+  "IGMAG": 0.0,
+  "ÍNDICE ARREND.": 0.0,
+  "DTe a MAG": 0,
+  "fecha_reporte": "15/01/2026 15:43",
   "metadata": {
-    "fecha_actualizacion": "2026-01-15T15:27:50.018182",
-    "fecha_actualizacion_legible": "15/01/2026 15:27:50",
-    "fuente": "https://www.mercadoagroganadero.com.ar",
-    "descripcion": "Datos diarios del Mercado Agroganadero de Argentina"
-  },
-  "categorias": {
-    "NOVILLOS": {
-      "categoria": "NOVILLOS",
-      "labels": [
-        "Ma 06/01/26",
-        "Mi 07/01/26",
-        "Vi 09/01/26",
-        "Ma 13/01/26",
-        "Mi 14/01/26"
-      ],
-      "precios": [
-        4093.771,
-        4044.951,
-        4224.734,
-        4061.169,
-        3947.27
-      ],
-      "cabezas": [
-        1476,
-        1031,
-        1234,
-        1764,
-        690
-      ]
-    },
-    "NOVILLITOS": {
-      "categoria": "NOVILLITOS",
-      "labels": [
-        "Ma 06/01/26",
-        "Mi 07/01/26",
-        "Vi 09/01/26",
-        "Ma 13/01/26",
-        "Mi 14/01/26"
-      ],
-      "precios": [
-        4273.58,
-        4245.944,
-        4343.856,
-        4315.166,
-        4226.948
-      ],
-      "cabezas": [
-        2490,
-        1433,
-        1612,
-        2482,
-        1125
-      ]
-    },
-    "VACAS": {
-      "categoria": "VACAS",
-      "labels": [
-        "Ma 06/01/26",
-        "Mi 07/01/26",
-        "Vi 09/01/26",
-        "Ma 13/01/26",
-        "Mi 14/01/26"
-      ],
-      "precios": [
-        4058.187,
-        3960.331,
-        4193.789,
-        4049.187,
-        3978.142
-      ],
-      "cabezas": [
-        2376,
-        1645,
-        1847,
-        2360,
-        1101
-      ]
-    },
-    "VAQUILLONAS": {
-      "categoria": "VAQUILLONAS",
-      "labels": [
-        "Ma 06/01/26",
-        "Mi 07/01/26",
-        "Vi 09/01/26",
-        "Ma 13/01/26",
-        "Mi 14/01/26"
-      ],
-      "precios": [
-        2660.821,
-        2597.1,
-        2616.582,
-        2627.6,
-        2592.687
-      ],
-      "cabezas": [
-        2126,
-        1890,
-        2685,
-        4565,
-        2078
-      ]
-    },
-    "TOROS": {
-      "categoria": "TOROS",
-      "labels": [
-        "Ma 06/01/26",
-        "Mi 07/01/26",
-        "Vi 09/01/26",
-        "Ma 13/01/26",
-        "Mi 14/01/26"
-      ],
-      "precios": [
-        2613.843,
-        2752.886,
-        2817.751,
-        2735.505,
-        2724.582
-      ],
-      "cabezas": [
-        211,
-        296,
-        337,
-        432,
-        198
-      ]
-    }
+    "fecha_actualizacion": "2026-01-15T15:43:25.517422",
+    "fuente": "https://www.mercadoagroganadero.com.ar/dll/inicio.dll",
+    "descripcion": "Datos del dashboard principal del Mercado Agroganadero"
   }
 }
