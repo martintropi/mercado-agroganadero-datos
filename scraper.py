@@ -16,7 +16,6 @@ class MercadoAgroganaderoScraper:
     
     BASE_URL = "https://www.mercadoagroganadero.com.ar"
     
-    # Mapeo de categorías
     CATEGORIAS = {
         'NOVILLOS': 1,
         'NOVILLITOS': 2,
@@ -47,17 +46,7 @@ class MercadoAgroganaderoScraper:
         )
     
     def fetch_categoria_data(self, categoria: str, clase: int, retries: int = 3) -> Optional[Dict]:
-        """
-        Obtiene datos de una categoría específica con reintentos
-        
-        Args:
-            categoria: Nombre de la categoría
-            clase: ID de la clase en el sistema
-            retries: Número de reintentos en caso de fallo
-            
-        Returns:
-            Diccionario con los datos o None si falla
-        """
+        """Obtiene datos de una categoría específica con reintentos"""
         fecha_ini, fecha_fin = self.get_date_range()
         
         url = (
@@ -69,22 +58,21 @@ class MercadoAgroganaderoScraper:
         
         for attempt in range(retries):
             try:
-                print(f"📡 Obteniendo datos de {categoria} (intento {attempt + 1}/{retries})...")
+                print(f"Obteniendo datos de {categoria} (intento {attempt + 1}/{retries})...")
                 
                 response = self.session.get(url, timeout=30)
                 response.raise_for_status()
                 
                 data = response.json()
                 
-                # Validar que los datos sean correctos
                 if not data.get('labels') or not data.get('data'):
-                    print(f"⚠️  Datos incompletos para {categoria}")
+                    print(f"Datos incompletos para {categoria}")
                     if attempt < retries - 1:
                         time.sleep(2 ** attempt)
                         continue
                     return None
                 
-                print(f"✅ Datos de {categoria} obtenidos correctamente")
+                print(f"Datos de {categoria} obtenidos correctamente")
                 return {
                     'categoria': categoria,
                     'labels': data['labels'],
@@ -93,28 +81,23 @@ class MercadoAgroganaderoScraper:
                 }
                 
             except requests.exceptions.RequestException as e:
-                print(f"❌ Error en petición para {categoria}: {e}")
+                print(f"Error en peticion para {categoria}: {e}")
                 if attempt < retries - 1:
                     time.sleep(2 ** attempt)
                 else:
                     return None
             except json.JSONDecodeError as e:
-                print(f"❌ Error al parsear JSON para {categoria}: {e}")
+                print(f"Error al parsear JSON para {categoria}: {e}")
                 return None
             except Exception as e:
-                print(f"❌ Error inesperado para {categoria}: {e}")
+                print(f"Error inesperado para {categoria}: {e}")
                 return None
         
         return None
     
     def scrape_all(self) -> Dict:
-        """
-        Obtiene datos de todas las categorías
-        
-        Returns:
-            Diccionario con todos los datos estructurados
-        """
-        print(f"\n🚀 Iniciando scraping - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        """Obtiene datos de todas las categorías"""
+        print(f"\nIniciando scraping - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print("=" * 70)
         
         datos = {
@@ -127,7 +110,6 @@ class MercadoAgroganaderoScraper:
             'categorias': {}
         }
         
-        # Obtener datos de cada categoría
         for categoria, clase in self.CATEGORIAS.items():
             categoria_data = self.fetch_categoria_data(categoria, clase)
             
@@ -135,40 +117,33 @@ class MercadoAgroganaderoScraper:
                 datos['categorias'][categoria] = categoria_data
                 time.sleep(1)
             else:
-                print(f"⚠️  No se pudieron obtener datos de {categoria}")
+                print(f"No se pudieron obtener datos de {categoria}")
         
-        # Estadísticas finales
         categorias_exitosas = len(datos['categorias'])
         total_categorias = len(self.CATEGORIAS)
         
         print("\n" + "=" * 70)
-        print(f"📊 Resumen: {categorias_exitosas}/{total_categorias} categorías obtenidas")
+        print(f"Resumen: {categorias_exitosas}/{total_categorias} categorias obtenidas")
         
         if categorias_exitosas == 0:
-            print("❌ ERROR: No se obtuvieron datos de ninguna categoría")
+            print("ERROR: No se obtuvieron datos de ninguna categoria")
             sys.exit(1)
         elif categorias_exitosas < total_categorias:
-            print(f"⚠️  ADVERTENCIA: Faltan {total_categorias - categorias_exitosas} categorías")
+            print(f"ADVERTENCIA: Faltan {total_categorias - categorias_exitosas} categorias")
         else:
-            print("✅ Todos los datos obtenidos exitosamente")
+            print("Todos los datos obtenidos exitosamente")
         
         return datos
     
     def save_to_json(self, data: Dict, filename: str = 'mercado_agroganadero.json'):
-        """
-        Guarda los datos en un archivo JSON
-        
-        Args:
-            data: Diccionario con los datos
-            filename: Nombre del archivo de salida
-        """
+        """Guarda los datos en un archivo JSON"""
         try:
             with open(filename, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-            print(f"\n💾 Datos guardados en '{filename}'")
+            print(f"\nDatos guardados en '{filename}'")
             return True
         except Exception as e:
-            print(f"\n❌ Error al guardar archivo: {e}")
+            print(f"\nError al guardar archivo: {e}")
             return False
 
 
@@ -179,17 +154,17 @@ def main():
         datos = scraper.scrape_all()
         
         if scraper.save_to_json(datos):
-            print("\n🎉 Scraping completado exitosamente\n")
+            print("\nScraping completado exitosamente\n")
             sys.exit(0)
         else:
-            print("\n❌ Error al guardar los datos\n")
+            print("\nError al guardar los datos\n")
             sys.exit(1)
             
     except KeyboardInterrupt:
-        print("\n\n⚠️  Proceso interrumpido por el usuario")
+        print("\n\nProceso interrumpido por el usuario")
         sys.exit(1)
     except Exception as e:
-        print(f"\n❌ Error fatal: {e}")
+        print(f"\nError fatal: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
@@ -197,18 +172,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-6. Click en **Commit changes**
-7. Agrega el mensaje: "Update scraper.py - nueva versión"
-8. Click en **Commit changes**
-
----
-
-## Paso 2: Actualizar requirements.txt
-
-1. Click en `requirements.txt`
-2. Click en ✏️ Edit
-3. Reemplaza el contenido con solo esto:
-```
-requests>=2.31.0
