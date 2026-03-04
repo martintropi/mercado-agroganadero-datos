@@ -3,13 +3,13 @@
   "CABEZAS": 7,
   "CAB.SEMANA": 13504,
   "OP": 100,
-  "INMAG": 0,
-  "IGMAG": 0,
-  "ÍNDICE ARREND.": 1,
+  "INMAG": 4,
+  "IGMAG": 3,
+  "ÍNDICE ARREND.": 4,
   "DTe a MAG": 0,
-  "fecha_reporte": "04/03/2026 12:55",
+  "fecha_reporte": "04/03/2026 13:57",
   "metadata": {
-    "fecha_actualizacion": "2026-03-04T12:55:02.126686",
+    "fecha_actualizacion": "2026-03-04T13:57:53.693515",
     "fuente": "https://www.mercadoagroganadero.com.ar/dll/inicio.dll",
     "descripcion": "Datos del dashboard principal del Mercado Agroganadero"
   }
