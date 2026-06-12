@@ -1,15 +1,15 @@
 {
-  "CAMIONES": 181,
-  "CABEZAS": 748,
-  "CAB.SEMANA": 15248,
-  "OP": 0,
+  "CAMIONES": 186,
+  "CABEZAS": 782,
+  "CAB.SEMANA": 15282,
+  "OP": 22,
   "INMAG": 0,
   "IGMAG": 0,
-  "ÍNDICE ARREND.": 645,
+  "ÍNDICE ARREND.": 1,
   "DTe a MAG": 0,
-  "fecha_reporte": "12/06/2026 08:24",
+  "fecha_reporte": "12/06/2026 12:18",
   "metadata": {
-    "fecha_actualizacion": "2026-06-12T08:24:35.925142",
+    "fecha_actualizacion": "2026-06-12T12:18:02.638966",
     "fuente": "https://www.mercadoagroganadero.com.ar/dll/inicio.dll",
     "descripcion": "Datos del dashboard principal del Mercado Agroganadero"
   }
