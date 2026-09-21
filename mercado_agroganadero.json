@@ -5,11 +5,11 @@
   "OP": 0,
   "INMAG": 0,
   "IGMAG": 0,
-  "ÍNDICE ARREND.": 1,
+  "ÍNDICE ARREND.": 2,
   "DTe a MAG": 0,
-  "fecha_reporte": "21/09/2026 00:59",
+  "fecha_reporte": "21/09/2026 06:08",
   "metadata": {
-    "fecha_actualizacion": "2026-09-21T00:59:30.359366",
+    "fecha_actualizacion": "2026-09-21T06:08:09.904848",
     "fuente": "https://www.mercadoagroganadero.com.ar/dll/inicio.dll",
     "descripcion": "Datos del dashboard principal del Mercado Agroganadero"
   }
