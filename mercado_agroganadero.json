@@ -1,15 +1,15 @@
 {
-  "CAMIONES": 21,
+  "CAMIONES": 29,
   "CABEZAS": 0,
   "CAB.SEMANA": 17271,
   "OP": 0,
   "INMAG": 0,
   "IGMAG": 0,
-  "ÍNDICE ARREND.": 1,
+  "ÍNDICE ARREND.": 818,
   "DTe a MAG": 0,
-  "fecha_reporte": "08/10/2026 22:55",
+  "fecha_reporte": "09/10/2026 02:48",
   "metadata": {
-    "fecha_actualizacion": "2026-10-08T22:55:33.000945",
+    "fecha_actualizacion": "2026-10-09T02:48:01.097486",
     "fuente": "https://www.mercadoagroganadero.com.ar/dll/inicio.dll",
     "descripcion": "Datos del dashboard principal del Mercado Agroganadero"
   }
